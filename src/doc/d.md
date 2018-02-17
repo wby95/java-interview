@@ -33,9 +33,13 @@
        - 脏读：读取了未提交的数据
        - 不可重复读：前后读取数据不一致
        - 幻读：指的是在某个事物在读取某个范围记录时，另一个事务又在该范围内插入了新的记录，当之前的事物再次读取该范围的记录时，会产生幻行。
-       InnoDB和XtraDB存储引擎通过多版本并发控制(MVCC)解决了幻读的问题。 T1 : select * from user where id=1;
-                                                                  T2 :  insert into user('id','username')values(1,'wby');
-                                                                  T1:  insert into user('id','username')values(1,'wby');这时候T1在插入的时候就会出现错误，因为记录已经存在
+       InnoDB和XtraDB存储引擎通过多版本并发控制(MVCC)解决了幻读的问题。
+       
+         |这时候T1在插入的时候就会出现错误，因为记录已经存在|
+          | :-----   | 
+       | T1 : select * from user where id=1;|
+        | T2 :  insert into user('id','username')values(1,'wby');|
+       | T1:  insert into user('id','username')values(1,'wby');|
                                                                  
                                                                   
        
