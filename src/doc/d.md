@@ -1,6 +1,14 @@
 # 数据库 
-  - MySql的逻辑架构
+  - MySql的逻辑架构  
+    参考链接： https://www.jianshu.com/p/e29a433db2ec
   - CRUD
+  
+     |数据库的增删改查|
+     | :-----   | 
+     | select fields from table;|
+     |insert into table() values();|
+     | update from table set fields=xxx where id=xx;|
+     |delete table where id=xx;|
   - 三大范式
   - ACID
     - 原子性(atomicity): 一个事物必须被视为一个不可分割的最小工作单元，整个事物中的操作要么全部提交成功，要么全部失败回滚，对于一个事物来说，不可能只执行其中的一部分操作，这就是的原子性。

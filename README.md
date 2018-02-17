@@ -28,10 +28,15 @@
   -  类加载的过程
    
  **[数据库](src/doc/d.md)**
- 
+  - MySql的逻辑架构
   - CRUD
   - 三大范式
   - ACID
+  - 事物的隔离级
+  - ANSI SQL隔离级别                                                   
+  - CAP
+   
+  
  
  **[计算机网络](src/doc/e.md)**
   - TCP/IP四层模型 OSI七层模型
