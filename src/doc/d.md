@@ -37,9 +37,9 @@
        
          |这时候T1在插入的时候就会出现错误，因为记录已经存在|
           | :-----   | 
-       | T1 : select * from user where id=1;|
-        | T2 :  insert into user('id','username')values(1,'wby');|
-       | T1:  insert into user('id','username')values(1,'wby');|
+        | T1 select * from user where id=1;|
+        | T2  insert into user('id','username')values(1,'wby');|
+       | T1 insert into user('id','username')values(1,'wby');|
                                                                  
                                                                   
        
