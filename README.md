@@ -32,6 +32,7 @@
   - MySql的逻辑架构
   - CRUD
   - 三大范式
+  - mysql 数据库的表锁、行锁、页级锁
   - ACID
   - 事物的隔离级
   - ANSI SQL隔离级别                                                   
