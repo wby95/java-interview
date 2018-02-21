@@ -2,98 +2,201 @@
 
  -  ![HashMap 类图结构](HashMap.JPG)
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HashMap 类图结构
-    - 简单一句话概括LinkedList:底层结构为双向链表(同时也实现了队列接口),当我们需要一种支持高效删除&添加元素的数据结构时，可以考虑使用链表
-    - LinkedList的一些字段
-        -  ```transient int size = 0;```
+    - 简单一句话概括LinkedList:底层结构为数组+链表(JDK8,链表长度为8则转为红黑树),这个类与HashTable近似等价，区别在于HashMap不是线程安全的并且允许null键和null值。由于基于哈希表实现，所以HashMap内部的元素是无序的。HashMap对与get与put操作的时间复杂度是常数级别的（在散列均匀的前提下）其提供键值对(可为null,此时key的hashcode为0)映射,但不保证顺序(包括在扩容时可能的改变),默认大小为16(总是为2的幂次方,目的是减少哈希冲突),负载因子0.75 (即实质上容量为0.75乘以16),扩容时为原始容量的两倍.如果需要满足线程安全，可以用 Collections的synchronizedMap方法使HashMap具有线程安全的能力，或者使用ConcurrentHashMap
+    - HashMap的一些字段
+        -  ```static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16，默认的初始容量```
        
-        -  ```transient Node<E> first;：指向头结点```
-        
-        -  ```transient Node<E> last;：指向尾结点```
-
-    - LinkedList的一些方法
-    
-        - Node<E>方法
-        ```
-        private static class Node<E> {
-               E item;//item为本结点所存储的数据对象
-               Node<E> next;//Node对象的next域指向它的下一个结点
-               Node<E> prev;//prev域指向它的上一个结点
-       
-               Node(Node<E> prev, E element, Node<E> next) {
-                   this.item = element;
-                   this.next = next;
-                   this.prev = prev;
-               }
+        -  ```static final float DEFAULT_LOAD_FACTOR = 0.75f; //默认负载因子```
          
+        -  ```threshold = DEFAULT_INITIAL_CAPACITY*float DEFAULT_LOAD_FACTOR:所容纳k-v的极限数，超过这个数目就重新resize(扩容)，扩容后的HashMap容量是之前容量的两倍```
+    
+        - ``` size:就是HashMap中实际存在的键值对数量```
+    - HashMap的一些方法
+    
+        - HashMap 定位数组索引方法
+        ```//Hash算法本质上就是三步：取key的hashCode值、高位运算、取模运算(&比%具有更高的效率)
+             static final int hash(Object key) {
+                  // h = key.hashCode() 为第一步 取hashCode值
+                  // h ^ (h >>> 16)  为第二步 高位参与运算
+                  int h;
+                  return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+              }
+              
+              
+          i = (length - 1) & hash//i:索引位置,length：数组的长度
+
        ```
-        - addFirst(E e)方法
-        ```public void addFirst(E e) {
-                   linkFirst(e);
+        -  put(K key, V value)方法
+        ``` public V put(K key, V value) {
+                   return putVal(hash(key), key, value, false, true);
                }
-            private void linkFirst(E e) {
-                   final Node<E> f = first;//首先把头结点引用存于变量f中
-                   final Node<E> newNode = new Node<>(null, e, f);//这个新结点的数据为我们传入的参数e，prev指针为null，next指针为f
-                   first = newNode;//然后把头结点指针指向新创建的结点newNode
-                   if (f == null)//若为null，说明之前链表中没有结点，所以last也指向newNode
-                        last = newNode;
-                    else//若f不为null，则把f的prev指针设为newNode
-                        f.prev = newNode;
-                    size++;
-                    modCount++;//modCount的作用与在ArrayList中的相同,否对其进行了结构性修改
-                   }
                
+              final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+                             boolean evict) {
+                  Node<K,V>[] tab; Node<K,V> p; int n, i;
+                  if ((tab = table) == null || (n = tab.length) == 0)
+                      n = (tab = resize()).length;//判断键值对数组table[i]是否为空或为null，否则执行resize()进行扩容；
+                  if ((p = tab[i = (n - 1) & hash]) == null)//根据键值key计算hash值得到插入的数组索引i
+                      tab[i] = newNode(hash, key, value, null);
+                  else {
+                      Node<K,V> e; K k;
+                      //判断table[i]的首个元素是否和key一样
+                      if (p.hash == hash &&
+                          ((k = p.key) == key || (key != null && key.equals(k))))
+                          e = p;
+                       //判断table[i] 是否为treeNode，即table[i] 是否是红黑树，如果是红黑树，则直接在树中插入键值对
+                      else if (p instanceof TreeNode)
+                          e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
+                      //遍历table[i]，判断链表长度是否大于8，大于8的话把链表转换为红黑树，在红黑树中执行插入操作.
+                      else {
+                          for (int binCount = 0; ; ++binCount) {
+                              if ((e = p.next) == null) {
+     
+                                  p.next = newNode(hash, key, value, null);
+                                  //链表长度大于8转换为红黑树进行处理
+                                  if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                                      treeifyBin(tab, hash);
+                                  break;
+                              }
+                              if (e.hash == hash &&
+                                  ((k = e.key) == key || (key != null && key.equals(k))))
+                                  break;
+                              p = e;
+                          }
+                      }
+                      if (e != null) { // existing mapping for key
+                          V oldValue = e.value;
+                          if (!onlyIfAbsent || oldValue == null)
+                              e.value = value;
+                          afterNodeAccess(e);
+                          return oldValue;
+                      }
+                  }
+                  ++modCount;
+                   // 如果数组大小 超过 负载因子*实际容量 则扩容
+                  if (++size > threshold)
+                      resize();
+                  afterNodeInsertion(evict);
+                  return null;
+              }     
       ```
     
-       - getFirst()方法 
+       - get方法 
        
-       ``` public E getFirst() {
-                  final Node<E> f = first;
-                  if (f == null)
-                      throw new NoSuchElementException();
-                  return f.item;
-              } 
+       ```  public V get(Object key) {
+                  Node<K,V> e;
+                  return (e = getNode(hash(key), key)) == null ? null : e.value;
+              }
+           final Node<K,V> getNode(int hash, Object key) {
+              Node<K,V>[] tab; Node<K,V> first, e; int n; K k;
+              if ((tab = table) != null && (n = tab.length) > 0 &&(first = tab[(n - 1) & hash]) != null) {//table不为null且索引处的首节点不为null
+                  if (first.hash == hash && // always check first node
+                      ((k = first.key) == key || (key != null && key.equals(k))))
+                      return first;//  则检查首节点的哈希值以及key值是否相等,相等则直接返回该节点;
+                  if ((e = first.next) != null) {
+                      if (first instanceof TreeNode)// //如果首节点的next节点不为null则先检查 节点是否为树节点,是则通过getTreeNode方法获取节点
+                          return ((TreeNode<K,V>)first).getTreeNode(hash, key);
+                      do {
+                          if (e.hash == hash &&
+                              ((k = e.key) == key || (key != null && key.equals(k))))
+                              return e;//否则遍历链表获取节点;
+                      } while ((e = e.next) != null);
+                  }
+              }
+              return null;
+          }
          ```    
             
-       - add方法// 仅仅是移动指针罢了 与数组拷贝相比效率提升很多 
-       ```
-         public boolean add(E e) {
-                linkLast(e);
-                return true;
+       - 扩容机制 
+     ``` 
+    /**
+     * Initializes or doubles table size.  If null, allocates in
+     * accord with initial capacity target held in field threshold.
+     * Otherwise, because we are using power-of-two expansion, the
+     * elements from each bin must either stay at same index, or move
+     * with a power of two offset in the new table.
+     *
+     * @return the table
+     */
+    final Node<K,V>[] resize() {
+        Node<K,V>[] oldTab = table;
+        int oldCap = (oldTab == null) ? 0 : oldTab.length;
+        int oldThr = threshold;
+        int newCap, newThr = 0;
+        if (oldCap > 0) {
+            //超过最大值就不再扩充了.
+            if (oldCap >= MAXIMUM_CAPACITY) {
+                threshold = Integer.MAX_VALUE;
+                return oldTab;
             }
-          void linkLast(E e) {
-                final Node<E> l = last;
-                final Node<E> newNode = new Node<>(l, e, null);
-                last = newNode;
-                if (l == null)
-                    first = newNode;
-                else
-                    l.next = newNode;
-                size++;
-                modCount++;
-             }
-
-              
-       ```
-       ```
-       public void add(int index, E element) {
-             checkPositionIndex(index);//首先调用checkPositionIndex方法检查给定index是否在合法范围内
-              
-             if (index == size)//若index等于size，这说明要在链表尾插入元素，直接调用linkLast方法，这个方法的实现与之前介绍的linkFirst类似
-                 linkLast(element);
-             else//若index小于size，则调用linkBefore方法
-                 linkBefore(element, node(index));
-         }
-         //在index处的Node前插入一个新Node（node(index)会返回index处的Node）
-         void linkBefore(E e, Node<E> succ) {
-                 // assert succ != null;
-                 final Node<E> pred = succ.prev;
-                 final Node<E> newNode = new Node<>(pred, e, succ);
-                 succ.prev = newNode;
-                 if (pred == null)
-                     first = newNode;
-                 else
-                     pred.next = newNode;
-                 size++;
-                 modCount++;
-             }
-         ```
+            // 没超过最大值，就扩充为原来的2倍
+            else if ((newCap = oldCap << 1) < MAXIMUM_CAPACITY &&
+                     oldCap >= DEFAULT_INITIAL_CAPACITY)
+                newThr = oldThr << 1; // double threshold
+        }
+        else if (oldThr > 0) // initial capacity was placed in threshold
+            newCap = oldThr;
+        else {               // zero initial threshold signifies using defaults
+            newCap = DEFAULT_INITIAL_CAPACITY;
+            newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+        }
+        // 计算新的resize上限
+        if (newThr == 0) {
+            float ft = (float)newCap * loadFactor;
+            newThr = (newCap < MAXIMUM_CAPACITY && ft < (float)MAXIMUM_CAPACITY ?
+                      (int)ft : Integer.MAX_VALUE);
+        }
+        threshold = newThr;
+        @SuppressWarnings({"rawtypes","unchecked"})
+            Node<K,V>[] newTab = (Node<K,V>[])new Node[newCap];
+        table = newTab;
+         // 把每个bucket都移动到新的buckets中
+        if (oldTab != null) {
+            for (int j = 0; j < oldCap; ++j) {
+                Node<K,V> e;
+                if ((e = oldTab[j]) != null) {
+                    oldTab[j] = null;
+                    if (e.next == null)
+                        newTab[e.hash & (newCap - 1)] = e;
+                    else if (e instanceof TreeNode)
+                        ((TreeNode<K,V>)e).split(this, newTab, j, oldCap);
+                    else { // preserve order链表优化重hash的代码块
+                        Node<K,V> loHead = null, loTail = null;
+                        Node<K,V> hiHead = null, hiTail = null;
+                        Node<K,V> next;
+                        do {
+                            next = e.next;
+                               // 原索引
+                            if ((e.hash & oldCap) == 0) {
+                                if (loTail == null)
+                                    loHead = e;
+                                else
+                                    loTail.next = e;
+                                loTail = e;
+                            }
+                              // 原索引+oldCap
+                            else {
+                                if (hiTail == null)
+                                    hiHead = e;
+                                else
+                                    hiTail.next = e;
+                                hiTail = e;
+                            }
+                        } while ((e = next) != null);
+                        // 原索引放到bucket里
+                        if (loTail != null) {
+                            loTail.next = null;
+                            newTab[j] = loHead;
+                        }
+                        // 原索引+oldCap放到bucket里
+                        if (hiTail != null) {
+                            hiTail.next = null;
+                            newTab[j + oldCap] = hiHead;
+                        }
+                    }
+                }
+            }
+        }
+        return newTab;
+    }
+    ```
