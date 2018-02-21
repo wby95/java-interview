@@ -1,7 +1,7 @@
 # java-interview
 **[java基础](src/doc/b.md)**
 
-
+ - java 面向对象的三个特征和含义
   - 什么是多态：
  -  String 和 StringBuffer的区别
  -  什么是线程同步
@@ -17,7 +17,8 @@
   -   死锁的产生和预防
   -   序列化 和 反序列化
   -   json 和 xml 的区别  
-  
+  - 接口和抽象类的区别：
+  -  反射机制
  **java 源码分析(集合&框架)**
   - [ArrayList源码分析](src/doc/源码.md)
   - [LinkedList源码分析](src/doc/LinkedList.md)
