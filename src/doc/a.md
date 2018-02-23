@@ -59,16 +59,11 @@
        2. 在当前用户目录创建目录 test
        3. 将/etc/passwd 复制到 test 目录
        4. 编辑多文件vi passwd result.txt,将 passwd 文件中含“ root”字符串的所有行复制到新文件 result.txt中
-       5. 21 到 42 行之间所有批注我不要了，要如何删除？
-       6. 将这个文件另存成名为 man.test.config 的文件名
-       7. 去到第 27 行，并且删除 15 个字符.
          - 答：
            ```
             1. echo "hello world!">hello.c
             2. mkdir test
             3. cp /etc/passwd test
             4. 1 vi passwd result.txt 2  grep root passwd > result.txt
-            5. 21G 22dd
-            6. :w man.test.config
-            7. 27G 15x
+           
            ```
