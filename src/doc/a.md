@@ -66,5 +66,4 @@
             2. mkdir test
             3. cp /etc/passwd test
             4. 1 vi passwd result.txt 2  grep root passwd > result.txt
-           
            ```
