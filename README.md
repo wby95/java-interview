@@ -75,7 +75,16 @@
  - 常用命令
  
  
--
+ 
+ 
+ **[j2ee解读](src/doc/a.md)**
+ 
+ - jsp&servlet
+ - 表现层框架（Struts2&SpringMvc）
+ - 持久化框架（Mybatis&Hibernate）
+ - Spring
+
+
 
 
  

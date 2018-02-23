@@ -104,7 +104,9 @@ public class Test1 {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
-
+       {
+            System.out.println("hello wprld");
+        }
 
     }
 }
