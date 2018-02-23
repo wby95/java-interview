@@ -55,7 +55,7 @@
         |6           |kill 	     |kill %[任务号] |	终止任务|
         |7           |	ps       | 	显示当前进程| |                     
                       	
-    - 熟悉vi
+    - 熟悉 vi
        1. 使用 echo 命令和重定位创建 hello.c 文件
        2. 在当前用户目录创建目录 test
        3. 将/etc/passwd 复制到 test 目录
