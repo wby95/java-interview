@@ -11,7 +11,7 @@
      |3. helloworld.methods()//调用方法|
 
    - |BeanFactory和ApplicationContext的区别|
-     | :--------  | 
+     | :--------  |  
      | 1. BeanFactory是解析，管理，实例化所有容器的Bean的入口|
  	 | 2. ApplicationContext继承自BeanFactory，提供了国际化，统一的资源文件读取方式等扩展|
  	 | 3. BeanFactory在启动的时候不会实例化Bean，getBean()的时候才会实例化。ApplicationContext在解析配置文件时会对配置文件所有对象都初始化。|
@@ -35,3 +35,30 @@
       5. autodetect – 先尝试以constructor的方法进行装配，失败后byType进行装配【在Spring3.0以后的版本被废弃，已经不再合法了】
    - Bean的作用域
      ![bean的作用于.png](bean的作用于.png)
+   - Spring Bean的生命周期
+   
+     - 没配置后置处理器前
+   
+       | Spring IOC 容器对 Bean 的生命周期进行管理的过程|
+       | :--------  | 
+       | 1. 通过构造器或工厂方法创建 Bean 实例|
+       | 2. 为 Bean 的属性设置值和对其他 Bean 的引用|
+       | 3. 调用 Bean 的初始化方法|
+       | 4. Bean 可以使用了|
+       | 5. 当容器关闭时, 调用 Bean 的销毁方法|
+        ![bean.jPG](bean.jPG)   ![bean1.jPG](bean1.jPG)
+     
+     - 配置后置处理器后
+     
+       |Spring IOC 容器对 Bean 的生命周期进行管理的过程|
+       | :--------  | 
+       | 1. 根据一定的策略实例化Bean并且注入|
+       | 2. 如果这个Bean实现了BeanNameAware接口，setBeanName()|
+       | 3. 如果这个Bean实现了BeanFactoryAware接口，setBeanFactory()|
+       | 4.	如果这个Bean实现了BeanPostProcessor接口，postProcessBeforeInitialization()|
+       | 5. 如果这个Bean配置了init-method或者实现了InitializingBean接口，就初始化Bean|
+       | 6. 如果这个Bean实现了BeanPostProcessor接口，postProcessAfterInitialization()|
+       | 7. 如果配置了destroy-method或者实现了DisposableBean接口，会销毁Bean|
+       
+          ![bean后置处理器](bean后置处理器.jPG)   ![bean后置处理器配置.jPG](bean后置处理器配置.jPG) ![结果.jPG](结果.jPG)
+
