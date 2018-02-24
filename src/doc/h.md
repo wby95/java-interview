@@ -74,4 +74,4 @@
      |引入（Introduction）：允许我们向现有的类添加新方法属性|
      |织入（Weaving）：把切面应用到目标对象来创建新的代理的过程|
      
-      ![aop.JPG](aop.JPG)  ![连接点和切入点.JPG](连接点和切入点.JPG)
+      ![aop.JPG](aop.JPG)  ![连接点和切入点.JPG](连接点和切入点.JPG) ![aop笔记.JPG](aop笔记.JPG)
