@@ -46,7 +46,7 @@
        | 3. 调用 Bean 的初始化方法|
        | 4. Bean 可以使用了|
        | 5. 当容器关闭时, 调用 Bean 的销毁方法|
-        ![bean.jPG](bean.jPG)   ![bean1.jPG](bean1.jPG)
+        ![bean.jPG](bean.JPG)   ![bean1.jPG](bean1.JPG)
      
      - 配置后置处理器后
      
@@ -60,5 +60,5 @@
        | 6. 如果这个Bean实现了BeanPostProcessor接口，postProcessAfterInitialization()|
        | 7. 如果配置了destroy-method或者实现了DisposableBean接口，会销毁Bean|
        
-          ![bean后置处理器](bean后置处理器.jPG)   ![bean后置处理器配置.jPG](bean后置处理器配置.jPG) ![结果.jPG](结果.jPG)
+          ![bean后置处理器](bean后置处理器.JPG)   ![bean后置处理器配置.jPG](bean后置处理器配置.JPG) ![结果.jPG](结果.JPG)
 
