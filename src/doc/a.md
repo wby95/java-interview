@@ -24,7 +24,7 @@
            2. cd vi-test  
            3. mv ex3_sample.txt vi-test
           ```                             
-    - 熟悉vi
+    - 熟悉 vi
     
        1. 在 vi 中设置行号
        2. 将 50 到 100 行之间的”man”改为”MAN”
@@ -36,7 +36,7 @@
          - 答：
            ```
             1. :set nu
-            2. :50,100s/man/MAN/gc
+            2. :50,100s/man/MAN/gc 
             3. 按u
             4. 65G 9yy G p
             5. 21G 22dd
