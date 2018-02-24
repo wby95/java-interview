@@ -3,19 +3,20 @@
  - 表现层框架（Struts2&SpringMvc）
  - 持久化框架（Mybatis&Hibernate）
  - Spring
- 
-   - Spring 是一个容器, 因为它包含并且管理应用对象的生命周期.
-     1. ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");//创建spring的ioc容器(容器初始化bean)
-     2. HelloWorld helloworld=(HelloWorld)ctx.getBean("applicationContext.xml所设置的id值");//容器中取出bean实例
-     3. helloworld.methods()//调用方法
-   - BeanFactory和ApplicationContext的区别
-     1. BeanFactory是解析，管理，实例化所有容器的Bean的入口
- 	 2. ApplicationContext继承自BeanFactory，提供了国际化，统一的资源文件读取方式等扩展
- 	 3. BeanFactory在启动的时候不会实例化Bean，getBean()的时候才会实例化。ApplicationContext在解析配置文件时会对配置文件所有对象都初始化。
- 	 4. ConfigurableApplicationContext 扩展于 ApplicationContext，新增加两个主要方法：refresh() 和 close()， 让 ApplicationContext 具有启动、刷新和关闭上下文的能力
-     5. ApplicationContext 的主要实现类：
-        - ClassPathXmlApplicationContext：从 类路径下加载配置文件
-        - FileSystemXmlApplicationContext: 从文件系统中加载配置文件
+    
+   - |Spring 是一个容器, 因为它包含并且管理应用对象的生命周期.|
+     | :--------  | 
+     |1. ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");//创建spring的ioc容器(容器初始化bean)|
+     |2. HelloWorld helloworld=(HelloWorld)ctx.getBean("applicationContext.xml所设置的id值");//容器中取出bean实例|
+     |3. helloworld.methods()//调用方法|
+     
+   - |BeanFactory和ApplicationContext的区别|
+     | :--------  | 
+     | 1. BeanFactory是解析，管理，实例化所有容器的Bean的入口|
+ 	 | 2. ApplicationContext继承自BeanFactory，提供了国际化，统一的资源文件读取方式等扩展|
+ 	 | 3. BeanFactory在启动的时候不会实例化Bean，getBean()的时候才会实例化。ApplicationContext在解析配置文件时会对配置文件所有对象都初始化。|
+ 	 | 4. ConfigurableApplicationContext 扩展于 ApplicationContext，新增加两个主要方法：refresh() 和 close()， 让 ApplicationContext 具有启动、刷新和关闭上下文的能力|
+     | 5. ApplicationContext 的主要实现类：- ClassPathXmlApplicationContext：从 类路径下加载配置文件- FileSystemXmlApplicationContext: 从文件系统中加载配置文件|
 
       ![ApplicationComtext](ApplicationComtext.JPG)  ![Appli.png](Appli.png)
    - IOC(Inversion of Control)：其思想是反转资源获取的方向. 传统的资源查找方式要求组件向容器发起请求查找资源. 作为回应, 容器适时的返回资源. 而应用了 IOC 之后, 则是容器主动地将资源推送给它所管理的组件, 组件所要做的仅是选择一种合适的方式来接受资源. 
