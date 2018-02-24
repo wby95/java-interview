@@ -9,7 +9,7 @@
      |1. ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");//创建spring的ioc容器(容器初始化bean)|
      |2. HelloWorld helloworld=(HelloWorld)ctx.getBean("applicationContext.xml所设置的id值");//容器中取出bean实例|
      |3. helloworld.methods()//调用方法|
-     
+
    - |BeanFactory和ApplicationContext的区别|
      | :--------  | 
      | 1. BeanFactory是解析，管理，实例化所有容器的Bean的入口|
