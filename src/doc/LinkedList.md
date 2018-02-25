@@ -10,7 +10,7 @@
         
         -  ```transient Node<E> last;：指向尾结点```
 
-    - LinkedList的一些方法
+    -  LinkedList的一些方法
     
         - Node<E>方法
         ```
