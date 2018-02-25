@@ -1,12 +1,14 @@
 package java反射机制;
 
+import java.util.HashMap;
+
 /**
  * Created by wby on 2018/2/9.
  */
 public class Person {
     String name;
     int age;
-
+    HashMap hashMap;
     public String getName() {
         return name;
     }

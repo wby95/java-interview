@@ -3,6 +3,7 @@
 
  - java 面向对象的三个特征和含义
   - 什么是多态：
+  - equals()&==&hashCode()&Object&hashMap
  -  String 和 StringBuffer的区别
  -  什么是线程同步
  -  进程 和 线程     

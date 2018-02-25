@@ -13,6 +13,77 @@
       -  要有继承 
       -  要有重写
       - 父类引用指向子类对象
+- equals()&==&hashCode()&Object&hashMap
+   - Object的方法有：
+     - public final native Class<?> getClass();
+     - public native int hashCode();
+     -  public boolean equals(Object obj) {
+               return (this == obj);
+           }
+     -  protected native Object clone() throws CloneNotSupportedException;
+     -     public String toString() {
+               return getClass().getName() + "@" + Integer.toHexString(hashCode());
+           }
+     - public final native void notify();
+     -  public final native void notifyAll();
+     -  public final native void wait(long timeout) throws InterruptedException;
+     -  protected void finalize() throws Throwable { }
+        - 从中我们可以知道java基类Object提供了不是final方法的equals()和hashCode(),都是可以被overWrite.
+        - 如果不被重写(String...这些类equals()都被重写了)equals()方法是判断两个对象是否相等等同于==
+        - hashCode()是一个native方法,返回是一个整型值，该native方法将对象在内存中的地址作为哈希码返回。保证不同对象的返回值不同。
+  - 重写equals()方法应遵循的规则(详细内容可参照eEffective Java 一下我写出几个关键字)
+    - 自反性
+    - 对称性
+    - 传递性
+    - 一致性
+    - 非null
+  - hashCode()
+    - 如果两个对象使用equals()方法判断相等，则hashCode()方法也应该相等。
+    - 如果两个对象使用equals()方法判断不相等，则hashCode()方法不一定相等。
+    - 在哈希表中，添加对象时，首先调用hashCode()方法计算对象的哈希码，通过哈希码可以直接定位对象在哈希表中的位置。如果该位置没有对象，可以直接将对象插入，如果该位置已经有对象存在了，则调用equals()方法比较它们是否相等，如果相等不保存其中，如果不等，则对象添加到链表中。
+  - String 中equals()和hashCode()的实现
+      ```   
+       public int hashCode() {
+             int h = hash;
+             if (h == 0 && value.length > 0) {
+                 char val[] = value;
+     
+                 for (int i = 0; i < value.length; i++) {
+                     h = 31 * h + val[i];
+                 }
+                 hash = h;
+             }
+             return h;
+         }
+
+
+      ```
+      ```  
+       public boolean equals(Object anObject) {
+                 if (this == anObject) {
+                     return true;
+                 }
+                 if (anObject instanceof String) {
+                     String anotherString = (String)anObject;
+                     int n = value.length;
+                     if (n == anotherString.value.length) {
+                         char v1[] = value;
+                         char v2[] = anotherString.value;
+                         int i = 0;
+                         while (n-- != 0) {
+                             if (v1[i] != v2[i])
+                                 return false;
+                             i++;
+                         }
+                         return true;
+                     }
+                 }
+                 return false;
+             }
+
+       ```
+       - String 对象equals()相等的条件是二者为同为String对象，长度相等，字符串完全相同，不要求是同一个对象。
+       - hashCode()方法栈有个质数31的作用:质数越大，哈希冲突越小，但是计算速度也越慢，31是折中的质数。
 - String 和 StringBuffer的区别：
      -  简单地说，StringBuffer对象的内容是可以修改的；而String对象一旦产生就不可以被修改，重新赋值
      其实是两个对象。
