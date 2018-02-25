@@ -4,7 +4,7 @@
  
      - 输入/输出重定向（< ,  >）
        1. 将 hello.out 的输出重定向到文件
-     - 答：
+       - 答：
           ```
           1. cat >hello.c
           2. #include<stdio.h>
