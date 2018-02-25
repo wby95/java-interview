@@ -19,7 +19,7 @@
      - public native int hashCode();
      -  public boolean equals(Object obj) {
                return (this == obj);
-           }
+            }
      -  protected native Object clone() throws CloneNotSupportedException;
      -     public String toString() {
                return getClass().getName() + "@" + Integer.toHexString(hashCode());
