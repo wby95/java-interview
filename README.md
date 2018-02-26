@@ -6,6 +6,7 @@
   - equals()&==&hashCode()&Object&hashMap
  -  String 和 StringBuffer的区别
  - Collection&Collections区别
+ - hashSet如何保证不重复
  -  什么是线程同步
  -  进程 和 线程     
   -   Lock 和 Synchronized 的区别
