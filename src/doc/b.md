@@ -218,12 +218,135 @@
          - 在网络上传送对象的字节序列
                                   当两个进程在进行远程通信的时候，彼此可以发送各种类型的数据，都会以二进制序列的形式在网络上传送，发送方需要把java对象转化为字节序列，
                               接收方则需要把字节序列转化为java对象。
-    - 两种方法实现
-      - [继承一个Serializable接口](../序列化和反序列化/SerializableDemo.java)
-      - [transient关键字来修饰不想被序列化的字段](../序列化和反序列化/transientDemo.java)
+    - 方法实现
+      - 继承一个Serializable接口
+      ```
+        package 序列化和反序列化;
+         
+         import java.io.*;
+         /*
+         * */
+         
+         class Student implements Serializable {
+             private  String name;
+             private int sex;
+         
+             public Student() {
+             }
+         
+             public Student(String name, int sex) {
+                 this.name = name;
+                 this.sex = sex;
+             }
+         
+             public String getName() {
+                 return name;
+             }
+         
+             public void setName(String name) {
+                 this.name = name;
+             }
+         
+             public int getSex() {
+                 return sex;
+             }
+         
+             public void setSex(int sex) {
+                 this.sex = sex;
+             }
+         
+         }
+         public class transientDemo {
+             public static void main(String[] args) throws IOException, ClassNotFoundException {
+                 Student student = new Student("王博越", 1);
+                 File file = new File("student.txt");
+                 /*对象的序列化:将对象转化为字节序列
+                 * */
+                 FileOutputStream fos = new FileOutputStream(file);
+                 ObjectOutputStream oos = new ObjectOutputStream(fos);
+                 oos.writeObject(student);
+                 oos.flush();
+                 oos.close();
+                 fos.close();
+                  /*对象的反序列化：将字节序列转化成对象
+                 * */
+                 FileInputStream fis = new FileInputStream(file);
+                 ObjectInputStream ois = new ObjectInputStream(fis);
+                 Student student1 = (Student) ois.readObject();
+                 System.out.println(student1.getName() + " : " + student1.getSex());
+                 ois.close();
+                 fis.close();
+         
+             }
+          
+         }
+       ```
+      - transient关键字来修饰不想被序列化的字段
+      ```package 序列化和反序列化;
+         
+         import java.io.*;
+         /*
+         * */
+         
+         class Student implements Serializable {
+             private transient String name;
+             private int sex;
+         
+             public Student() {
+             }
+         
+             public Student(String name, int sex) {
+                 this.name = name;
+                 this.sex = sex;
+             }
+         
+             public String getName() {
+                 return name;
+             }
+         
+             public void setName(String name) {
+                 this.name = name;
+             }
+         
+             public int getSex() {
+                 return sex;
+             }
+         
+             public void setSex(int sex) {
+                 this.sex = sex;
+             }
+         
+         }
+         public class transientDemo {
+             public static void main(String[] args) throws IOException, ClassNotFoundException {
+                 Student student = new Student("王博越", 1);
+                 File file = new File("student.txt");
+                 /*对象的序列化:将对象转化为字节序列
+                 * */
+                 FileOutputStream fos = new FileOutputStream(file);
+                 ObjectOutputStream oos = new ObjectOutputStream(fos);
+                 oos.writeObject(student);
+                 oos.flush();
+                 oos.close();
+                 fos.close();
+                  /*对象的反序列化：将字节序列转化成对象
+                 * */
+                 FileInputStream fis = new FileInputStream(file);
+                 ObjectInputStream ois = new ObjectInputStream(fis);
+                 Student student1 = (Student) ois.readObject();
+                 System.out.println(student1.getName() + " : " + student1.getSex());
+                 ois.close();
+                 fis.close();
+         
+             }
+         }
+
+       ```
       - 使用Externalizable
+       ```
         -  void writeExternal(ObjectOutput out) throws IOException;
            void readExternal(ObjectInput in) throws IOException, ClassNotFoundException; 控制对象的序列化和反序列化。
+        ```
  -  json 和 xml    
     - xml : 
        - 应用广泛，可扩性强，被广泛地应用在各种场合。
