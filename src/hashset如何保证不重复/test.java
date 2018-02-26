@@ -18,7 +18,7 @@ public class test {
         * 两个对象一样当时还是被添加进来了
         * */
         HashSet hashSet = new HashSet();
-
+        //HashMap中使用键对象来计算hashcode值&HashSet使用成员对象来计算hashcode值，对于两个对象来说hashcode可能相同，所以equals()方法用来判断对象的相等性，如果两个对象不同的话，那么返回false
         //调用add方法时，先判断hash值是否相同，如果不同，就不会再调用equals()方法
         hashSet.add(new UserBean(("aa"), 11));
         hashSet.add(new UserBean(("bb"), 22));
