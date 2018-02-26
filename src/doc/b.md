@@ -281,7 +281,7 @@
           
          }
        ```
-      - transient关键字来修饰不想被序列化的字段
+      - transient关键字来修饰不想被序列化的字段//name输出为null;
       ```package 序列化和反序列化;
          
          import java.io.*;
