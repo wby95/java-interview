@@ -221,7 +221,9 @@
     - 两种方法实现
       - [继承一个Serializable接口](../序列化和反序列化/SerializableDemo.java)
       - [transient关键字来修饰不想被序列化的字段](../序列化和反序列化/transientDemo.java)
-        
+      - 使用Externalizable
+        -  void writeExternal(ObjectOutput out) throws IOException;
+           void readExternal(ObjectInput in) throws IOException, ClassNotFoundException; 控制对象的序列化和反序列化。
  -  json 和 xml    
     - xml : 
        - 应用广泛，可扩性强，被广泛地应用在各种场合。
