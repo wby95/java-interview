@@ -37,7 +37,7 @@ public class UserBean {
    @Override
     public boolean equals(Object obj) {
         UserBean bean=(UserBean)obj;
-        System.out.println("ssss");
+        System.out.println("调用equals");
         return this.name==bean.name&& this.age==bean.age;
     }
     public int hashCode(){

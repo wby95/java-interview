@@ -15,19 +15,19 @@
       - 父类引用指向子类对象
 - equals()&==&hashCode()&Object&hashMap
    - Object的方法有：
-     - public final native Class<?> getClass();
-     - public native int hashCode();
-     -  public boolean equals(Object obj) {
+     - public final native Class<?> getClass();//返回Object的运行时类
+     - public native int hashCode();//返回对象的哈希值
+     -  public boolean equals(Object obj) {//指示其他某个对象是否与此对象的地址相等。
                return (this == obj);
             }
-     -  protected native Object clone() throws CloneNotSupportedException;
+     -  protected native Object clone() throws CloneNotSupportedException;//创建并返回对象的一个副本
      -     public String toString() {
                return getClass().getName() + "@" + Integer.toHexString(hashCode());
            }
-     - public final native void notify();
-     -  public final native void notifyAll();
+     - public final native void notify();//唤醒在此对象监视器上等待的单个线程
+     -  public final native void notifyAll();//唤醒在此对象监视器上等待的所有线程
      -  public final native void wait(long timeout) throws InterruptedException;
-     -  protected void finalize() throws Throwable { }
+     -  protected void finalize() throws Throwable { }//当垃圾回收器确定不存在对该对象的更多引用时，由对象的垃圾回收器调用此方法。
         - 从中我们可以知道java基类Object提供了不是final方法的equals()和hashCode(),都是可以被overWrite.
         - 如果不被重写(String...这些类equals()都被重写了)equals()方法是判断两个对象是否相等等同于==
         - hashCode()是一个native方法,返回是一个整型值，该native方法将对象在内存中的地址作为哈希码返回。保证不同对象的返回值不同。
@@ -93,6 +93,13 @@
      使用+操作符，每一次添加到一个字符串时，字符串对象都需要重新找一个新的内存空间来容纳更大的字符串，这是
      一个非常消耗时间的操作，添加一个字符就意味着要一次又一次的对字符串重新分配内存
      - StringBuffer 是内存安全的 
+- Collection&Collections区别
+  - Collection集合类的上级接口，继承该接口的接口主要有Set&List
+  - Collections集合类的工具类，提供了一系类静态方法实现对各个集合类的收索、排序、线程安全化等操作。
+
+- hashSet如何保证不重复
+   - 前景：Set集合都是需要去掉重复元素的,如果在存储的时候逐个equals()比较,效率较低
+   - 
 - 什么是线程同步：
      -  当使用多个线程来访问同一个数据时候，容易引发出线程安全的问题（可能引发的数据的不一致问题）
      - _解决方法_：1 同步代码块：synchronized(对象){}
