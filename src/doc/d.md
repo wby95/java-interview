@@ -57,7 +57,24 @@
           |T1 insert into user('id','username')values(1,'wby');|
                                                                  
                                                                   
+ - 乐观锁&悲观锁
+   - 乐观锁：对更新的数据提交才校验是否冲突(数据版本：第一种是使用版本号，第二种是使用时间戳)
+     - 数据版本,为数据增加的一个版本标识。当读取数据时，将版本标识的值一同读出，数据每更新一次，同时对版本标识进行更新。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的版本标识进行比对，如果数据库表当前版本号与第一次取出来的版本标识值相等，则予以更新，否则认为是过期数据
+   - 悲观锁：在整个数据处理过程中，将数据处于锁定状态。
+     -MySQL InnoDB中使用悲观锁
+       - 要使用悲观锁，我们必须关闭MySQL数据库的自动提交属性，因为MySQL默认使用autocommit模式，也就是说，当你执行一个更新操作后，MySQL会立刻将结果进行提交。 set autocommit=0;
        
+         | MySQL InnoDB中使用悲观锁|
+         | :--------  |
+         | 0. 开始事务  begin;/begin work;/start transaction; (三者选一就可以)|
+         | 1. 查询出商品信息 select status from t_goods where id=1 for update;|
+         | 2. 根据商品信息生成订单   insert into t_orders (id,goods_id) values (null,1);|
+         | 3. 修改商品status为2  update t_goods set status=2;|
+         | 4. 提交事务 commit;/commit work;|
+         |上面的查询语句中，我们使用了 select…for update 的方式，这样就通过开启排他锁的方式实现了悲观锁。此时在t_goods表中，id为1的 那条数据就被我们锁定了，其它的事务必须等本次事务提交之后才能执行。这样我们可以保证当前的数据不会被其它事务修改。   上面我们提到，使用 select…for update 会把数据给锁住，不过我们需要注意一些锁的级别，MySQL InnoDB默认行级锁。行级锁都是基于索引的，如果一条SQL语句用不到索引是不会使用行级锁的，会使用表级锁把整张表锁住，这点需要注意|
+      
+   
+
  - CAP
   
  
