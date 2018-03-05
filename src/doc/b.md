@@ -229,15 +229,16 @@
     - 方法实现步奏：
       - 序列化实现步奏
       
-           | 序列化实现步骤 |
-           | :--------  |
-           | 1：导入java.io包 |
-           | 2: 需要|
-           ||
-           ||
-           ||
-           ||
-           ||
+           | 序列化实现步骤 |反序列化步骤|
+           | :--------  | :----------|
+           | 1：导入java.io包 | 1：导入java.io包  |
+           | 2: 需要序列化的对象所属的类必须实现Serializable接口| 2：需要|反序列化的对象所属的类必须实现Serializable接口|
+           | 3：构造FileOutputStream对象| 3:构造FileInputStream对象|
+           | 4：构造ObjectOutputStream对象| 4：构造ObjectInputStream对象|
+           | 5：使用ObjectOutputStream对象的writeObject()方法进行序列化| 5：使用ObjectInputSteam对象的readObject()方法进行反序列化|
+           | 6：关闭ObjectOutputStream对象| 6：关闭ObjectInputStream对象|
+           | 7：关闭FileOutputStream对象| 7：关闭FileInputSteam对象|
+           | 8：对序列化全过程捕获IOException异常| 8：对反序列化的全过程捕获ClassNotFoundException&IOException异常|
       - 继承一个Serializable接口
       ```
         package 序列化和反序列化;
