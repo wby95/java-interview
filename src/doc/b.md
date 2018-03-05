@@ -15,13 +15,13 @@
       - 父类引用指向子类对象
 - equals()&==&hashCode()&Object&hashMap
    - Object的方法有：
-     - public final native Class<?> getClass();//返回Object的运行时类
+     - public final native Class<?> getClass();//返回描述调用对象的Class对象，当类被加载时，类Class的对象自动被创建，Class类的getName()方法获取类或者接口的全类名，通过newInstance()方法创建一个与调用对象内容相同的新实例，间接实现了对象的克隆。
      - public native int hashCode();//返回对象的哈希值
      -  public boolean equals(Object obj) {//指示其他某个对象是否与此对象的地址相等。
                return (this == obj);
             }
-     -  protected native Object clone() throws CloneNotSupportedException;//创建并返回对象的一个副本
-     -     public String toString() {
+     -  protected native Object clone() throws CloneNotSupportedException;//创建并返回对象的一个副本,返回与调用对象内容相等的新对象。复制后，一个对象内容的改变的变化不会影响另一个对象。区别=
+     -     public String toString() {//返回描述对象的一个字符串。
                return getClass().getName() + "@" + Integer.toHexString(hashCode());
            }
      - public final native void notify();//唤醒在此对象监视器上等待的单个线程
@@ -226,7 +226,18 @@
          - 在网络上传送对象的字节序列
                                   当两个进程在进行远程通信的时候，彼此可以发送各种类型的数据，都会以二进制序列的形式在网络上传送，发送方需要把java对象转化为字节序列，
                               接收方则需要把字节序列转化为java对象。
-    - 方法实现
+    - 方法实现步奏：
+      - 序列化实现步奏
+      
+           | 序列化实现步骤 |
+           | :--------  |
+           | 1：导入java.io包 |
+           | 2: 需要|
+           ||
+           ||
+           ||
+           ||
+           ||
       - 继承一个Serializable接口
       ```
         package 序列化和反序列化;
@@ -350,7 +361,7 @@
          }
 
        ```
-      - 使用Externalizable
+      - 使用Externalizable:此接口会有重大的安全隐患，因为以下两个方法声明为public，因此恶意类可以用这些方法读取和写入对象数据，如果反序列化对象包含了敏感的信息，则要格外小心。
        ```
         -  void writeExternal(ObjectOutput out) throws IOException;
            void readExternal(ObjectInput in) throws IOException, ClassNotFoundException; 控制对象的序列化和反序列化。
@@ -388,3 +399,7 @@
         - Field:提供了有关类或接口的属性信息，以及对他的动态访问权限。
         - Constructor:提供关于类的单个构造方法的信息以及对他的动态访问权限。
         - Method:提供了类或者接口中的某个方法的信息。
+        
+ - 泛型类
+    - 在创建一个类的时候，类的部分成员或者方法中的参数的类型可以暂时不指定特定的类型，而是用一个符号代替，所以泛型也被称为参数化类型和参量多态。
+    

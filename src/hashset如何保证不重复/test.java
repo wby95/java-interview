@@ -34,11 +34,17 @@ public class test {
         hashSet.add(new UserBean(("bb"), 22));
         hashSet.add(new UserBean(("cc"), 33));
         hashSet.add(new UserBean(("aa"), 11));
+        System.out.println();
         /*我是哈希码
                 我是哈希码
         我是哈希码
                 我是哈希码
                 用equals
-        * */
+        * */  HashMap hashMap=new HashMap();
+        hashMap.put("1",11);
+        hashMap.put("2",22);
+        System.out.println(hashMap.keySet());//[1,2]
+        System.out.println(hashMap.toString());
     }
+
 }
