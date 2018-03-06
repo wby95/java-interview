@@ -11,15 +11,22 @@
     | 3： service方法：没一次的请求都会被调用，实际用于响应请求 |
     | 4： destroy方法：只被调用一次，在servlet所在的Web应用被卸载前被调用，用于释放当前servlet所占的资源 |
  
+    - public void init(ServletConfig servletConfig)
+       ```
+    
+    
+       ```
  - 表现层框架（Struts2&SpringMvc）
  - 持久化框架（Mybatis&Hibernate）
  - Spring
+ 
     
-   - |Spring 是一个容器, 因为它包含并||且管理应用对象的生命周期.|
+   - | Spring 是一个容器, 因为它包含并且管理应用对象的生命周期. |
      | :--------  | 
-     |1. ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");//创建spring的ioc容器(容器初始化bean)|
-     |2. HelloWorld helloworld=(HelloWorld)ctx.getBean("applicationContext.xml所设置的id值");//容器中取出bean实例|
-     |3. helloworld.methods()//调用方法|
+     | 1. ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");创建spring的ioc容器(容器初始化bean) |
+     | 2. HelloWorld helloworld=(HelloWorld)ctx.getBean("applicationContext.xml所设置的id值");容器中取出bean实例 |
+     | 3. helloworld.methods()//调用方法 |
+
 
    - |BeanFactory和ApplicationContext的区别|
      | :--------  |  
