@@ -4,17 +4,21 @@
     - 什么是servlet:Server+Applet(web环境下，运行于客户端的java组件),-->运行于服务端的java程序。servlet是特殊的java类并提供基于请求-响应模式的web服务，他没有main()方法，他不能独立运行，他是运行于容器中的。
     - 处理流程：浏览器中输入一串url地址，servlet容器通过url地址，通过web.xml配置文件找到对应的servlet,同时将请求转给servlet对应的service方法，（每当一个客户端请求一个HttpServlet对象的时候，该对象的service方法就会被调用，而且传递给这个方法一个HttpServletRequest对象&HttpServletResponse对象作为参数）,当时get请求的时候，service将请求转给doGet(),方法处理，当post请求的时候，则转给doPost()，方法处理。最后都是通过HttpServletResponse将响应结果返回给客户端。
    
-    | servlet的生命周期 |
-    | :--------  | 
-    | 1： 构造器：只有第一次请求servlet时，创建servlet的实例，调用构造器，这说明servlet是一个单实例  | 
-    | 2： init方法：只被调用一次，在创建好实例后立即被调用，用于初始化servlet（包含参数，初始化是构造器所不及的） |
-    | 3： service方法：没一次的请求都会被调用，实际用于响应请求 |
-    | 4： destroy方法：只被调用一次，在servlet所在的Web应用被卸载前被调用，用于释放当前servlet所占的资源 |
+      | servlet的生命周期 |
+      | :--------  | 
+      | 1： 构造器：只有第一次请求servlet时，创建servlet的实例，调用构造器，这说明servlet是一个单实例  | 
+      | 2： init方法：只被调用一次，在创建好实例后立即被调用，用于初始化servlet（包含参数，初始化是构造器所不及的）|
+      | 3： service方法：每一次的请求都会被调用，实际用于响应请求 |
+      | 4： destroy方法：只被调用一次，在servlet所在的Web应用被卸载前被调用，用于释放当前servlet所占的资源 |
  
     - public void init(ServletConfig servletConfig)
        ```
-    
-    
+         servletConfig 1封装了servlet的配置信息
+                       2可获取servletContext对象 getServletContext()
+            1.getInitParameter(String name):获取初始化参数
+            2.getInitParameterNames():获取参数名组成的Enumeration对象
+            3.getServletName()：获取<Servlet-name>文本内容
+            
        ```
  - 表现层框架（Struts2&SpringMvc）
  - 持久化框架（Mybatis&Hibernate）
