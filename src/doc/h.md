@@ -1,5 +1,23 @@
 #j2ee解读
  - jsp&servlet
+  -jsp
+    - 什么是jsp:是一种动态的网页技术，jsp就是指在html中嵌套了java的脚本语言。
+    - 工作原理：在web服务器接收到了jsp请求时，首先会对jsp文件进行翻译，将编写好的jsp文件通过jsp引擎转化成可识别的java源代码，java源代码再被编译成可执行的字节码文件（.class）,编译后进入执行阶段，将结果页面返回给客户端。
+    - jsp九大内置对象
+    
+      |内置对象|描述|
+      | :--------  | :--------  |
+      |pageContext|jsp的页面容器|
+      |request|得到用户的请求信息|
+      |response|服务器向客户端返回的信息|
+      |session|用来保存一个用户的信息|
+      |application|表示所有用户的共享信息|
+      |config|服务器配置，获取初始化参数|
+      |out|页面输出|
+      |page|表示从页面中表示出来的一个Servlet实例|
+      |exception|表示jsp页面所发生的异常，在错误页面中才起作用|
+      
+      
   - servlet
     - 什么是servlet:Server+Applet(web环境下，运行于客户端的java组件),-->运行于服务端的java程序。servlet是特殊的java类并提供基于请求-响应模式的web服务，他没有main()方法，他不能独立运行，他是运行于容器中的。
     - 处理流程：浏览器中输入一串url地址，servlet容器通过url地址，通过web.xml配置文件找到对应的servlet,同时将请求转给servlet对应的service方法，（每当一个客户端请求一个HttpServlet对象的时候，该对象的service方法就会被调用，而且传递给这个方法一个HttpServletRequest对象&HttpServletResponse对象作为参数）,当时get请求的时候，service将请求转给doGet(),方法处理，当post请求的时候，则转给doPost()，方法处理。最后都是通过HttpServletResponse将响应结果返回给客户端。
