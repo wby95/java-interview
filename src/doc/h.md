@@ -26,8 +26,15 @@
        |session|在一次会话的范围中保存，无论何种跳转都可以使用，但是新打开浏览器无法使用|
        |application|在整个服务器上保存，所有用户都可以使用|
       
-    
+    - 客户端跳转&服务端跳转
       
+       |客户端跳转|服务端跳转|
+       | :--------  | :--------  |
+       |response.sendRedirect()|<jsp:forward>|
+       |跳转之后地址栏是会改变的，变为跳转之后页面的地址|跳转之后地址栏是不会改变的|
+       
+         - 在使用request时，只有在服务器端的跳转才能够保存request范围的属性保存到跳转页面，而如果是客户端的跳转，则无法保存request属性的传递。
+       
   - servlet
     - 什么是servlet:Server+Applet(web环境下，运行于客户端的java组件),-->运行于服务端的java程序。servlet是特殊的java类并提供基于请求-响应模式的web服务，他没有main()方法，他不能独立运行，他是运行于容器中的。
     - 处理流程：浏览器中输入一串url地址，servlet容器通过url地址，通过web.xml配置文件找到对应的servlet,同时将请求转给servlet对应的service方法，（每当一个客户端请求一个HttpServlet对象的时候，该对象的service方法就会被调用，而且传递给这个方法一个HttpServletRequest对象&HttpServletResponse对象作为参数）,当时get请求的时候，service将请求转给doGet(),方法处理，当post请求的时候，则转给doPost()，方法处理。最后都是通过HttpServletResponse将响应结果返回给客户端。
