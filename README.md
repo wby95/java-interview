@@ -1,6 +1,7 @@
 # java-interview
 **[java基础](src/doc/b.md)**
-
+  - javac.exe&java.exe&javadoc.exe&PATH&CLASSPATH
+  - 基本类型
  - java 面向对象的三个特征和含义
   - 什么是多态：
   - equals()&==&hashCode()&Object&hashMap
