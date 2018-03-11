@@ -1,4 +1,4 @@
-#j2ee解读
+# j2ee解读
  - jsp&servlet
   -jsp
     - 什么是jsp:是一种动态的网页技术，jsp就是指在html中嵌套了java的脚本语言。
@@ -55,7 +55,9 @@
             3.getServletName()：获取<Servlet-name>文本内容
             
        ```
-       
+    - Servlet API
+       - HrrpServlet:能够根据客户端发过来的请求，进行相对应的处理，并且将处理的结果会自动分装到HttpServletRequest对象中，根据HTTP协议中的定义的请求方法，HttpServlet分别提供了请求的相对应的方法。
+       ![HttpServlet.JPG](HttpServlet.JPG)
        
  - 表现层框架（Struts2&SpringMvc）
  - 持久化框架（Mybatis&Hibernate）
