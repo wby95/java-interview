@@ -1,4 +1,14 @@
 # java 基础
+ - javac.exe&java.exe&javadoc.exe&PATH&CLASSPATH
+   
+     ||
+     | :--------  |
+     |javac.exe:将java源程序(*.java)编译成字节码文件(.class)<--虚拟机可识别|
+     |java.exe：用来执行字节码文件，会启动jvm虚拟机加载运行时所需要的类库。|
+     |javadoc.exe:生成java程序的注释文档|
+     |CLASSPATH:它是javac编译器的一个环境变量，他的作用是：当你写入import java.util.*时，编译器面对import关键字，就知道你要引入java.util这个包下的类，但是你得告诉编译器你把包放在哪个位置了，如何告诉他呢，CLASSPATH就是这作用|
+     |PATH环境变量: 作用是指定命令收索的路径，在命令中执行命令如：javac编译java,他会到PATH所指定的路径中查找是否能找到相对应的命令程序|
+  
  - java 面向对象的三个特征和含义
    - 封装：属性和方法的封装。用不同的修饰符来加以控制。
    - 继承：子类可以继承父类的成员变量和成员方法。继承可以提高代码的复用性。
