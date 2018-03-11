@@ -62,8 +62,9 @@
  - 表现层框架（Struts2&SpringMvc）
  
  
-  -SpringMvc
-    ![DispatcherServlet.JPG](DispatcherServlet.JPG)
+   - SpringMvc
+  
+     ![DispatcherServlet.JPG](DispatcherServlet.JPG)
     
    | SpringMvc体系结构|
    | :--------  | 
