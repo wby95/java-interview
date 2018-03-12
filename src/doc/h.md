@@ -74,7 +74,6 @@
       |5 ActionProxy创建了一个ActionInvocation实例，同时Actionproxy通过代理模式调用Action,在调用之前，ActionInvocation会根据配置加载Action相关的拦截器(Interceptor)|
       |6 Action执行完毕后，ActionInvocation负责根据配置文件的配置找到对应的返回结果result|
       
-     
    - SpringMvc
   
      ![DispatcherServlet.JPG](DispatcherServlet.JPG)
