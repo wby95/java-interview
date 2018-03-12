@@ -60,21 +60,34 @@
        ![HttpServlet.JPG](HttpServlet.JPG)
        
  - 表现层框架（Struts2&SpringMvc）
- 
- 
+    
+   - Struts2
+     
+     ![struts2捕获.PNG](struts2捕获.PNG)
+     
+      |Struts2的工作流程|
+      | :--------  | 
+      |1 客户端提交一个HttpServletRequest请求|
+      |2 请求被提交到了一系列的过滤器(Filter),其中FilterDispatcher是核心控制器|
+      |3 FilterDispatcher询问ActionMapper是否需要调用某个Action来处理这个请求，如果决定要处理这个请求，FilterDispatcher则把请求的处理交给了ActionProxy|
+      |4 ActionProxy通过询问配置文件，找到调用的Action类|
+      |5 ActionProxy创建了一个ActionInvocation实例，同时Actionproxy通过代理模式调用Action,在调用之前，ActionInvocation会根据配置加载Action相关的拦截器(Interceptor)|
+      |6 Action执行完毕后，ActionInvocation负责根据配置文件的配置找到对应的返回结果result|
+      
+     
    - SpringMvc
   
      ![DispatcherServlet.JPG](DispatcherServlet.JPG)
     
-   | SpringMvc体系结构|
-   | :--------  | 
-   |1 客户端发送了一个HTTP请求|
-   |2 DispatcherServlet接收到请求之后，将请求的处理工作委托给具体的处理器(Handler)-->处理请求相应的业务逻辑，Dispatcher凭借请求信息（url），按照某种机制找到了请求对应的处理器，DispatcherServlet通过HandlerMapping完成这一工作|
-   |3 一个设计良好的处理器应该通过调用service层的业务对象完成业务处理|
-   |4 处理器完成业务逻辑的处理后，返回了一个ModelAndView给DispatcherServlet,他包含了视图的逻辑名和渲染视图时，需要用到的模型对象。|
-   |5 ModelAndView包含了视图逻辑名，DispatcherServlet必须知道逻辑名对应的真实视图对象，视图的解析工作由ViewResolver来完成|
-   |6 得到真实的视图对象后，DispatcherServlet将请求分派给View对象，由他完成Model数据的渲染工作|
-   |7 最终客户端得到返回的响应|
+      | SpringMvc体系结构|
+      | :--------  | 
+      |1 客户端发送了一个HTTP请求|
+      |2 DispatcherServlet接收到请求之后，将请求的处理工作委托给具体的处理器(Handler)-->处理请求相应的业务逻辑，Dispatcher凭借请求信息（url），按照某种机制找到了请求对应的处理器，DispatcherServlet通过HandlerMapping完成这一工作|
+      |3 一个设计良好的处理器应该通过调用service层的业务对象完成业务处理|
+      |4 处理器完成业务逻辑的处理后，返回了一个ModelAndView给DispatcherServlet,他包含了视图的逻辑名和渲染视图时，需要用到的模型对象。|
+      |5 ModelAndView包含了视图逻辑名，DispatcherServlet必须知道逻辑名对应的真实视图对象，视图的解析工作由ViewResolver来完成|
+      |6 得到真实的视图对象后，DispatcherServlet将请求分派给View对象，由他完成Model数据的渲染工作|
+      |7 最终客户端得到返回的响应|
    
  - 持久化框架（Mybatis&Hibernate）
  - Spring
