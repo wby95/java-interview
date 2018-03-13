@@ -72,6 +72,47 @@
        - HrrpServlet:能够根据客户端发过来的请求，进行相对应的处理，并且将处理的结果会自动分装到HttpServletRequest对象中，根据HTTP协议中的定义的请求方法，HttpServlet分别提供了请求的相对应的方法。
        ![HttpServlet.JPG](HttpServlet.JPG)
        
+       - ServletContext
+         - ServletContext（即application）是由ServletContextListener接口监听的，他能监听ServletContext对象的生命周期，实际上就是监听web应用的生命周期，Servlet容器终止或者启动Web应用时候，会触发ServletContextEvent事件，ServletContextListener接口中定义了处理事件的两种方法。
+         
+            -  contextInitialized(ServletContextEvent sce) ：当Servlet 容器启动Web 应用时调用该方法。在调用完该方法之后，容器再对Filter 初始化，并且对那些在Web 应用启动时就需要被初始化的Servlet 进行初始化。
+            -  contextDestroyed(ServletContextEvent sce) ：当Servlet 容器终止Web 应用时调用该方法。在调用该方法之前，容器会先销毁所有的Servlet 和Filter 过滤器。
+            
+             ```
+               //实际开发中的应用，启动tomcat时候，将Spring容器中取出数据放入application中
+               @Component
+               public class InitAction implements ServletContextListener,ApplicationContextAware{
+               
+               	private static ApplicationContext applicationContext;
+               	
+               	@Override
+               	public void contextDestroyed(ServletContextEvent arg0) {
+               		// TODO Auto-generated method stub
+               		
+               	}
+               
+               	@Override
+               	public void contextInitialized(ServletContextEvent servletContextEvent) {
+               		// 获取application
+               		ServletContext application=servletContextEvent.getServletContext();
+               		//Spring容器中取出相关bean的值
+               		ProductBigTypeService productBigTypeService=(ProductBigTypeService)applicationContext.getBean("productBigTypeService");
+               		List<ProductBigType> bigTypeList=productBigTypeService.findAllBigTypeList();
+               		//数据存放于application中，贯穿web应用的整个生命周期
+               		application.setAttribute("bigTypeList", bigTypeList);
+               	}
+               
+               	@Override
+               	public void setApplicationContext(ApplicationContext applicationContext)
+               			throws BeansException {
+               		// TODO Auto-generated method stub
+               		this.applicationContext=applicationContext;
+               	}
+               
+               }
+
+             ```
+       
  - 表现层框架（Struts2&SpringMvc）
     
    - Struts2
