@@ -112,7 +112,8 @@
        
          ![值栈的两个逻辑部分JPG.JPG](值栈的两个逻辑部分JPG.JPG) & ![值栈1.JPG](值栈1.JPG)
       
-        ```   //存在值栈时候怎么在jsp页面进行的访问
+        ```   
+             //存在值栈时候怎么在jsp页面进行的访问
              <s:if test="pageBean!=null">
                        第<s:property value="pageBean.page"/>/<s:property value="pageBean.totalPage"/>页
                        <s:if test="pageBean.page!=1">
@@ -135,7 +136,8 @@
                    </s:if>
 
         ```
-        ``` //存在session时候怎么在jsp页面进行的访问
+        ```
+           //存在session时候怎么在jsp页面进行的访问
            <s:iterator value="#session.blist" var="b">
                             <a href="${pageContext.request.contextPath}/phone_findByBId.action?psid=<s:property value="#b.bid" />&page=1">
                                 <li><span><s:property value="#b.bname"></s:property>
