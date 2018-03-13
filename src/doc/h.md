@@ -1,6 +1,19 @@
 # j2ee解读
+
+ - session&cookie
+  
+    |session&cookie区别||
+    | :--------  | :--------  |
+    |session是在服务器端保存用户信息|cookie是在客户端保存用户的信息|
+    |session对象随会话的结束而关闭|cookie是长期保存在客户端的|
+    |session通常保存重要的信息|cookie通常保存不重要的信息|
+    
+      - cookie是由服务器生成的，发送给客户端浏览器的，浏览器会将其保存在某个目录下的文本文件 
+        
  - jsp&servlet
-  -jsp
+ 
+  - jsp
+  
     - 什么是jsp:是一种动态的网页技术，jsp就是指在html中嵌套了java的脚本语言。
     - 工作原理：在web服务器接收到了jsp请求时，首先会对jsp文件进行翻译，将编写好的jsp文件通过jsp引擎转化成可识别的java源代码，java源代码再被编译成可执行的字节码文件（.class）,编译后进入执行阶段，将结果页面返回给客户端。
     - jsp九大内置对象
@@ -74,6 +87,64 @@
       |5 ActionProxy创建了一个ActionInvocation实例，同时Actionproxy通过代理模式调用Action,在调用之前，ActionInvocation会根据配置加载Action相关的拦截器(Interceptor)|
       |6 Action执行完毕后，ActionInvocation负责根据配置文件的配置找到对应的返回结果result|
       
+   - Struts2几个重要的API
+     
+     - ActionContext:是Action的上下文对象，Action运行期间所用到的数据都会保存到ActionContext中
+      
+      ![ActionContext的所有方法.JPG](ActionContext的所有方法.JPG)
+      
+        - 获取request比较奇葩：public Object get(Object key): ActionContext 类中没有提供类似 getRequest() 这样的方法来获取 HttpServletRequest 对应的 Map 对象. 要得到 HttpServletRequest 对应的 Map 对象, 可以通过为 get() 方法传递 “request” 参数实现
+
+        - 一般开发中的用法
+      
+        ```  public String findByBId(){
+                  Brand brand=phonesizeService.findByPsid(psid);
+                  //存于session中
+                   ActionContext.getContext().getSession().put("brand",brand);
+                   PageBean<Phone> pageBean= phoneService.findByPageBid(psid,page);
+                   //存于值栈中
+                   ActionContext.getContext().getValueStack().set("pageBean",pageBean);
+                   return "findByBId";
+               }
+
+        ```
+       - 值栈的理解：ValueStack(值栈): 贯穿整个 Action 的生命周期(每个 Action 类的对象实例都拥有一个 ValueStack 对象). 相当于一个数据的中转站. 在其中保存当前 Action 对象和其他相关对象. 
+       
+         ![值栈的两个逻辑部分JPG.JPG](值栈的两个逻辑部分JPG.JPG) & ![值栈1.JPG](值栈1.JPG)
+      
+        ```   //存在值栈时候怎么在jsp页面进行的访问
+             <s:if test="pageBean!=null">
+                       第<s:property value="pageBean.page"/>/<s:property value="pageBean.totalPage"/>页
+                       <s:if test="pageBean.page!=1">
+                           <a href="${pageContext.request.contextPath}/phone_findByBId.action?psid=<s:property value="psid" />&pageBean.page=1">首页</a>
+                           <a href="${pageContext.request.contextPath}/phone_findByBId.action?psid=<s:property value="psid" />&page=<s:property value="pageBean.page-1" />">上一页</a>
+                       </s:if>
+                       <s:iterator var="i" begin="1" end="pageBean.totalPage">
+                           <s:if test="pageBean.page!=#i">
+                               <a href="${pageContext.request.contextPath}/phone_findByBId.action?psid=<s:property value="psid" />&page=<s:property value="#i" />"><s:property
+                                       value="#i"/></a>
+                           </s:if>
+                           <s:else>
+                               <s:property value="#i"></s:property>
+                           </s:else>
+                       </s:iterator>
+                       <s:if test="pageBean.page!=pageBean.totalPage">
+                           <a href="${pageContext.request.contextPath}/phone_findByBId.action?psid=<s:property value="psid" />&page=<s:property value="pageBean.page+1" />">下一页</a>
+                           <a href="${pageContext.request.contextPath}/phone_findByBId.action?psid=<s:property value="psid" />&page=<s:property value="pageBean.totalPage" />">尾页</a>
+                       </s:if>
+                   </s:if>
+
+        ```
+        ``` //存在session时候怎么在jsp页面进行的访问
+           <s:iterator value="#session.blist" var="b">
+                            <a href="${pageContext.request.contextPath}/phone_findByBId.action?psid=<s:property value="#b.bid" />&page=1">
+                                <li><span><s:property value="#b.bname"></s:property>
+        
+                            </span></li>
+                            </a>
+            </s:iterator>
+
+        ```
    - SpringMvc
   
      ![DispatcherServlet.JPG](DispatcherServlet.JPG)
