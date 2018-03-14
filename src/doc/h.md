@@ -117,6 +117,14 @@
                }
 
              ```
+     - Servlet 规范里两个高级特性
+       - Filter
+          - 什么是Filter：对发送到Servlet的请求进行拦截&对响应到客户端的也进行拦截，实现类Filter接口的Java类
+          - 调用的过程可类比Servlet的生命周期
+          - 有点像面向编程的韵味。
+       - Listener
+          - 常用监听器&触发处理的事件
+       
        
  - 表现层框架（Struts2&SpringMvc）
     
