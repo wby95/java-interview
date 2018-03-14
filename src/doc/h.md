@@ -1,13 +1,17 @@
 # j2ee解读
 
  - session&cookie
+ 
+   - 由于Http是无状态的，服务器单从网络无法知道客户的身份，就给了客户端们颁发了一个通行证，这样服务端将可以通过通行证确定用户的身份了，这就是Cookie的工作原理。
   
     |session&cookie区别||
     | :--------  | :--------  |
     |session是在服务器端保存用户信息|cookie是在客户端保存用户的信息|
     |session对象随会话的结束而关闭|cookie是长期保存在客户端的|
     |session通常保存重要的信息|cookie通常保存不重要的信息|
-    
+    |Sesion存储的是对象相对是比较方便的，但是Session存储在服务器内是会对服务器造成压力的|Cookie对象保存的是一个属性对，一个request&response可以同时使用多个Cookie|   
+    |Session第一次访问服务器的时候会自动创建，Session超时的时间可以在web.xml配置文件中修改<session-config><sessiom-timeout>60</session-timeout></session-config>单位为分钟|关闭浏览器的时候，Cookie就会消失，Cookie上默认的的maxAge是-1，maxAge为负数的时候，为临时性的Cookie,不会写到Cookie文件中，maxAge为0的时候，表示删除Cookie&也可以选择response.add(Cookie cookie)同名时覆盖原有的|
+     
       - cookie是由服务器生成的，发送给客户端浏览器的，浏览器会将其保存在某个目录下的文本文件 
         
  - jsp&servlet
@@ -69,10 +73,10 @@
             
        ```
     - Servlet API
-       - HrrpServlet:能够根据客户端发过来的请求，进行相对应的处理，并且将处理的结果会自动分装到HttpServletRequest对象中，根据HTTP协议中的定义的请求方法，HttpServlet分别提供了请求的相对应的方法。
+       - HttpServlet:能够根据客户端发过来的请求，进行相对应的处理，并且将处理的结果会自动分装到HttpServletRequest对象中，根据HTTP协议中的定义的请求方法，HttpServlet分别提供了请求的相对应的方法。
        ![HttpServlet.JPG](HttpServlet.JPG)
        
-       - ServletContext
+       - ServletContext:是servlet中的全局存储信息，当服务器启动的时候，web容器为web应用创建了唯一的ServletContext对象，可以在ServletContext中存放共享信息。
          - ServletContext（即application）是由ServletContextListener接口监听的，他能监听ServletContext对象的生命周期，实际上就是监听web应用的生命周期，Servlet容器终止或者启动Web应用时候，会触发ServletContextEvent事件，ServletContextListener接口中定义了处理事件的两种方法。
          
             -  contextInitialized(ServletContextEvent sce) ：当Servlet 容器启动Web 应用时调用该方法。在调用完该方法之后，容器再对Filter 初始化，并且对那些在Web 应用启动时就需要被初始化的Servlet 进行初始化。
@@ -202,7 +206,10 @@
       |6 得到真实的视图对象后，DispatcherServlet将请求分派给View对象，由他完成Model数据的渲染工作|
       |7 最终客户端得到返回的响应|
    
- - 持久化框架（Mybatis&Hibernate）
+ - 持久化框架（Mybatis&Hibernate） 
+  
+   - Mybatis入门可见另一个仓库：https://github.com/wby95/mybatis_helloworld
+ 
  - Spring
  
     
@@ -278,7 +285,6 @@
      |织入（Weaving）：把切面应用到目标对象来创建新的代理的过程|
      
       ![aop.JPG](aop.JPG)  ![连接点和切入点.JPG](连接点和切入点.JPG) ![aop笔记.JPG](aop笔记.JPG)
-
     - 事物的传播性行为   
     
         ![Spring 支持的事务传播行为.jpg](Spring支持的事务传播行为.jpg) 
