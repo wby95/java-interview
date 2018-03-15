@@ -123,7 +123,14 @@
           - 调用的过程可类比Servlet的生命周期
           - 有点像面向编程的韵味。
        - Listener
-          - 常用监听器&触发处理的事件
+          - 什么是Servlet监听器：Servlet中规定了一种特殊的类，他用于监听web应用程序中ServletContext&HttpSession&ServletRequest等域对象的创建、销毁(ServletContextListener)&属性值的变化(ServletContextAttributeListener)的事件。
+          - 常用监听器(这里主要介绍ServletContextListener)其类似。
+             
+             |ServletContextListener|
+             | :--------  |
+             |1 ServletContextListener接口可以在WEB应用被加载时，对当前的WEB应用的相关资源等进行初始操作。eg:1 创建数据库的连接池 2 创建Spring的ioc容器 3 读取web应用的初始化参数|
+             |2 void contextInitialized(ServletContextEvent var1); //WEB应用加载时调用void contextDestroyed(ServletContextEvent var1);//web应用撤销时调用 |
+             
        
        
  - 表现层框架（Struts2&SpringMvc）
