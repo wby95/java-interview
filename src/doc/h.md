@@ -288,6 +288,7 @@
        
           ![bean后置处理器](bean后置处理器.JPG)   ![bean后置处理器配置.jPG](bean后置处理器配置.JPG) ![结果.jPG](结果.JPG)
 
+
    - |Spring AOP中的概念|
      | :--------  | 
      |目标(Target): 被通知的对象|
@@ -305,14 +306,21 @@
     
         ![Spring 支持的事务传播行为.jpg](Spring支持的事务传播行为.jpg) 
        
-       
+
+  
    - FactoryBean&BeanFactory
    
       |FactoryBean|BeanFactory|
       | :--------  |  :--------  | 
       |是一个能生产&修饰对象生成的工厂Bean,他的实现类似于设计模式中的工厂模式和修饰器模式类似|是个ioc容器，管理应用对象的生命周期 |
       | T getObject() throws Exception//返回bean实例; Class<?> getObjectType();//返回 FactoryBean 创建的 Bean 类型boolean isSingleton();//返回由 FactoryBean 创建的 Bean 实例的作用域是 singleton 还是 prototype||
-      
-   -----------------------------------------------------
    
-   ##### spring部分知识点引用尚硅谷的教程
+   - Bean的加载过程
+     - http://geeekr.com/read-spring-source-1-how-to-load-bean/    
+
+
+
+
+
+
+   - ##### spring部分知识点引用尚硅谷的教程
