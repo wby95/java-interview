@@ -94,6 +94,7 @@
  
  - jsp&servlet
  - 表现层框架（Struts2&SpringMvc）
+   -  [src/doc/hibernate配置.md](src/doc/hibernate配置.md)
  - 持久化框架（Mybatis&Hibernate）
  - Spring
 
