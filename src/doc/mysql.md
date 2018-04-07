@@ -99,3 +99,29 @@
      |+|至少出现过一个|
      |字符串{}|a{3}字段连续出现3次a字符的记录|
      |字符串{m,n}|匹配字符串出现至少m次，最多n次|
+     
+
+ - ### 数据库&数据表的操作
+ 
+     #### 创建数据库
+        create database 数据库名字;
+     #### 查看数据库
+        show databases;
+     #### 选择数据库
+        use 数据库名字；
+     #### 删除数据库
+        drop database 数据库名字;
+     #### 创建数据表
+        create [temporary] table [if not exists] 数据表名(列名1 属性,列名2 属性...);
+     #### 查看数据表
+        describe 数据表名 [列名]; 
+        show columns from 数据表名
+     #### 修改表结构
+        alter table 数据表名 add 字段名 属性
+                            modify 字段名 属性
+                            change column 字段名 新字段名 属性;
+      ### 重命名表
+        rename table 数据表名1 to 数据库表名2;
+        
+      #### 删除数据表
+        drop table 数据表名;
