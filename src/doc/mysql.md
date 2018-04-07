@@ -145,3 +145,10 @@
         |4 单列索引|只对应一个字段的索引|
         |5 多列索引|多个字段的索引|
         |6 空间索引|mysql只有MyISAM存储引擎支持空间索引，索引的字段不能为空|
+          
+       ### 创建索引
+       
+          [unique|fulltext|spatial]index}key
+          [别名](属性名1[(长度)][asc|desc])
+          
+          create [unique|fulltext|spatial]index index_name on table_name(属性[(length)][asc|desc])
