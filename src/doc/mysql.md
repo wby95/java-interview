@@ -10,35 +10,35 @@
 
 - ### 单表查询
  
-   ####查询所有字段
+   #### 查询所有字段
       select * from 表名;
-   ####查询指定字段
+   #### 查询指定字段
       select 字段名 from 表名;
-   ####查询指定数据
+   #### 查询指定数据
       select * from 表名 where 字段='';
-   ####带in关键字的查询
+   #### 带in关键字的查询
       selct * from 表名 where 字段 in('','',...);
-   ####带between and的范围查询
+   #### 带between and的范围查询
       select * from 表名 where 字段[not] between 取值 and 取值
-   ####带like的字符匹配查询
+   #### 带like的字符匹配查询
       select * from 表名 where 字段 like '%取值%';
-   ####带_的字段匹配查询,m为开头，n为结尾的三个字段
+   #### 带_的字段匹配查询,m为开头，n为结尾的三个字段
       select * from 表名 where 字段 like 'm_n';
-   ####用is null关键字查询空值
+   #### 用is null关键字查询空值
       select * from 表名 where 字段 is null;
-   ####带and的多条件查询
+   #### 带and的多条件查询
       select * from 表名 where 条件1 and 条件2 and [...];
-   ####带or的多查询条件查询 
+   #### 带or的多查询条件查询 
       select * from 表名 where 条件1 or 条件2 or [...];
-   ####带distinct关键字去除结果中重复的行
+   #### 带distinct关键字去除结果中重复的行
       select distinct 字段名 from 表名
-   ####用order by关键字对结果的查询
+   #### 用order by关键字对结果的查询
       select * from 表名 where 字段 order by 字段[asc|desc];
-   ####用group by关键字分组查询
+   #### 用group by关键字分组查询
       select * from 表名 group by 字段   ：将数据划分到不同的组中，实现对记录的分组查询，查询结果只是显示每组的第一条记录。
-   ####用group by&group_concat()函数一起上使用 关键字分组查询
+   #### 用group by&group_concat()函数一起上使用 关键字分组查询
       select group_concat(字段) from 表名 group by 字段    ：group_concat(字段) 可以将分组中的所有字段值都显示出来。
-   ####用limit限制查询结果的数量关键字分组查询
+   #### 用limit限制查询结果的数量关键字分组查询
       select * from 表名  order by 字段 limit 3
       select * from 表名  order by 字段 limit 1,2  :参数1是开始读取的第一条记录(从0开始)，参数2是查询的记录数；
 
