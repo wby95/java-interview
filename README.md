@@ -55,7 +55,8 @@
   -  Mysql的数据类型                                 
   - 范式&反范式(上面的知识点已经整理了三大范式)                                            
   - CAP
-   
+  
+  **[mysql语句复习](src/doc/mysql.md)**
   
  
  **[计算机网络](src/doc/e.md)**
