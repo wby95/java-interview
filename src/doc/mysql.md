@@ -122,6 +122,5 @@
                             change column 字段名 新字段名 属性;
       ### 重命名表
         rename table 数据表名1 to 数据库表名2;
-        
       #### 删除数据表
         drop table 数据表名;
