@@ -1,4 +1,5 @@
 # mysql
+
 - ### sql执行的顺序
      1. from子句组装来自不同数据源的数据
      2. where子句基于指定的条件对记录进行筛选
@@ -120,7 +121,7 @@
         alter table 数据表名 add 字段名 属性
                             modify 字段名 属性
                             change column 字段名 新字段名 属性;
-      ### 重命名表
+      #### 重命名表
         rename table 数据表名1 to 数据库表名2;  
       #### 删除数据表
         drop table 数据表名;
@@ -146,9 +147,31 @@
         |5 多列索引|多个字段的索引|
         |6 空间索引|mysql只有MyISAM存储引擎支持空间索引，索引的字段不能为空|
           
-       ### 创建索引
-       
+       #### 创建索引
+         - #### 在创建数据表时创建索引      
           [unique|fulltext|spatial]index}key
           [别名](属性名1[(长度)][asc|desc])
-          
+         - #### 在已经建立的数据表中创建索引 
           create [unique|fulltext|spatial]index index_name on table_name(属性[(length)][asc|desc])
+         - #### 修改表结构添加索引
+          alter table 表名 add  [unique|fulltext|spatial]index index_name(属性[(length)][asc|desc])
+       #### 删除索引
+         drop index index_name on 表名
+         
+ - ### 视图
+    
+    1. 视图是从数据库中的一个表或者多个表中导出的虚拟表，其作用是方便用户对数据的操作。
+    2. 视图的作用 
+         1. 简单性(简化用户对数据的理解&简化他们的操作),常用的查询可以被定义为视图
+         2. 安全性(防止未授权用户查看特定的行列)
+         3. 逻辑数据独立性(应用程序&数据库表独立)
+         
+    #### 创建视图
+       create view
+       视图名[(属性清单)]
+       as select 语句
+      `1. select语句不能包括from子句中的子查询`
+      
+    #### 查看视图
+       desc 视图名
+    #### 查看视图  
