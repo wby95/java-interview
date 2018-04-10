@@ -171,7 +171,26 @@
        视图名[(属性清单)]
        as select 语句
       `1. select语句不能包括from子句中的子查询`
+      `2. 视图中select 可以包含子查询 `
       
     #### 查看视图
        desc 视图名
-    #### 查看视图  
+    #### 查看视图
+       show table status like '视图名'
+    #### 查看视图
+       show create view 视图名
+    #### 修改视图
+       create or replace view
+       视图名[(属性清单)]
+       as select 语句    //在视图已经存在的情况下，对视图进行修改；视图不存在的情况下创建视图
+       
+       alter 视图名
+       视图名[(属性清单)]
+       as select 语句 
+    #### 删除视图
+       drop view if exists 视图名
+       
+ - ### 数据完整性约束
+     1. 实体完整性
+     2. 参照完整性
+     3. 用户自定义完整性
