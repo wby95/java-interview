@@ -195,7 +195,6 @@
 
  ### easyUI这样获取Json的内嵌数据   
   https://blog.csdn.net/u014049880/article/details/54897006
- 
  ```
  <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%>
