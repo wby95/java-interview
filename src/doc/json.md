@@ -29,7 +29,7 @@
 	}
 	
    ```
-   - 2 （Date类型转化）JavaBean出现Date格式时，转化成json时会出现将其转化为：{"date":6,"day":3,"hours":21,"minutes":26,"month":0,"nanos":290000000,"seconds":31,"time":1452086791290,"timezoneOffset":-480,"year":116}，这个不易处理，如果需要将Date转换为我们认识的“yyyy-MM-dd”格式，则需要自行创建时间转换器，并实现json-lib中的JsonValueProcessor接口，实现该接口中的两个方法（processArrayValue和processObjectValue）：
+   - 2 （Date类型转化）JavaBean出现Date格式时，转化成json时会出现将其转化为：{"date":5,"day":4,"hours":16,"minutes":26,"month":4,"seconds":31,"time":1452086791290,"timezoneOffset":-480,"year":116}，这个不易处理，如果需要将Date转换为我们认识的“yyyy-MM-dd”格式，则需要自行创建时间转换器，并实现json-lib中的JsonValueProcessor接口，实现该接口中的两个方法（processArrayValue和processObjectValue）：
    ```
     	public String list()throws Exception{
     		PageBean pageBean=new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
