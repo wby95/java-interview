@@ -36,16 +36,19 @@
  **[java 虚拟机](src/doc/c.md)**
  
   
-
   -  运行时数据区域
   -  内存溢出
   -  垃圾回收
   -  垃圾收集器
   -  类加载的过程
- 
+ **[easyui](src/doc/easyui.md)**
+
+   - ComboBox（下拉列表框）  当上一个下拉列框选择后，下一个下拉列框显示对应的信息
+   - easyui主页面一般的布局
+   - CRUD的写法
+
  **[json](src/doc/json.md)**
 
- 
   - 概念
   - 在使用json-lib包中JSONArray rows=JSONArray.fromObject()时，可能出现以下几种情况：     
   - easyUI这样获取Json的内嵌数据
