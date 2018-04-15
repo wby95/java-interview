@@ -48,7 +48,7 @@
  
   - 概念
   - 在使用json-lib包中JSONArray rows=JSONArray.fromObject()时，可能出现以下几种情况：     
-
+  - easyUI这样获取Json的内嵌数据
  
  **[数据库](src/doc/d.md)**
   - MySql的逻辑架构

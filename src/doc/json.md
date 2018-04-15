@@ -191,3 +191,109 @@
     }
 
 ```
+
+
+ ### easyUI这样获取Json的内嵌数据   
+ https://blog.csdn.net/u014049880/article/details/54897006
+ 
+ ```
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+     pageEncoding="UTF-8"%>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>Insert title here</title>
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/default/easyui.css">
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/icon.css">
+ <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/jquery.min.js"></script>
+ <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+ <script type="text/javascript" src="${pageContext.request.contextPath}/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+ <script type="text/javascript">
+ 
+ 	function searchProduct(){
+ 		$("#dg").datagrid('load',{
+ 			"s_product.name":$("#s_productName").val()
+ 		});
+ 	}
+ 	
+ 	function formatProPic(val,row){
+ 		return "<img width=100 height=100 src='${pageContext.request.contextPath}/"+val+"'>";
+ 	}
+ 
+ 	function formatSmallTypeId(val,row){
+ 		return row.smallType.id;
+ 	}
+ 	
+ 	function formatSmallTypeName(val,row){
+ 		return row.smallType.name;
+ 	}
+ 	
+ 	function formatBigTypeId(val,row){
+ 		return row.bigType.id;
+ 	}
+ 	
+ 	function formatBigTypeName(val,row){
+ 		return row.bigType.name;
+ 	}
+ 	
+ 	function formatHot(val,row){
+ 		if(val==1){
+ 			return "是";
+ 		}else{
+ 			return "否";
+ 		}
+ 	}
+ 	
+ 	function formatSpecialPrice(val,row){
+ 		if(val==1){
+ 			return "是";
+ 		}else{
+ 			return "否";
+ 		}
+ 	}
+ 	
+ </script>
+ </head>
+ <body style="margin:1px;">
+ 	<table id="dg" title="商品管理" class="easyui-datagrid"
+ 	 fitColumns="true" pagination="true" rownumbers="true"
+ 	 url="product_list.action" fit="true" toolbar="#tb">
+ 	 <thead>
+ 	 	<tr>
+ 	 		<th field="cb" checkbox="true" align="center"></th>
+ 	 		<th field="id" width="50" align="center">编号</th>
+ 	 		<th field="proPic" width="150" align="center" formatter="formatProPic">商品图片</th>
+ 	 		<th field="name" width="150" align="center">商品名称</th>
+ 	 		<th field="price" width="50" align="center">价格</th>
+ 	 		<th field="stock" width="50" align="center">库存</th>
+ 	 		<th field="smallType.id" width="100" align="center" formatter="formatSmallTypeId" hidden="true">所属商品小类id</th>
+ 	 		<th field="smallType.name" width="100" align="center" formatter="formatSmallTypeName">所属商品小类</th>
+ 	 		<th field="bigType.id" width="100" align="center" formatter="formatBigTypeId" hidden="true">所属商品大类id</th>
+ 	 		<th field="bigType.name" width="100" align="center" formatter="formatBigTypeName">所属商品大类</th>
+ 	 		<th field="hot" width="50" align="center" formatter="formatHot">是否热卖</th>
+ 	 		<th field="specialPrice" width="50" align="center" formatter="formatSpecialPrice">是否特价</th>
+ 	 		<th field="description" width="50" align="center" hidden="true">描述</th>
+ 	 		<th field="hotTime" width="50" align="center" hidden="true">设置热卖时间</th>
+ 	 		<th field="specialPriceTime" width="50" align="center" hidden="true">设置特价时间</th>
+ 	 	</tr>
+ 	 </thead>
+ 	</table>
+ 	
+ 	<div id="tb">
+ 		<div>
+ 			<a href="javascript:openUserAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
+ 			<a href="javascript:openUserModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+ 			<a href="javascript:deleteUser()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+ 			<a href="javascript:deleteUser()" class="easyui-linkbutton" iconCls="icon-hot" plain="true">设置为热卖</a>
+ 			<a href="javascript:deleteUser()" class="easyui-linkbutton" iconCls="icon-special" plain="true">设置为特价</a>
+ 		</div>
+ 		<div>
+ 			&nbsp;商品名称：&nbsp;<input type="text" id="s_productName" size="20" onkeydown="if(event.keyCode==13) searchProduct()"/>
+ 			<a href="javascript:searchProduct()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
+ 		</div>
+ 	</div>
+ </body>
+ </html>
+ 
+ ```
