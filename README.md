@@ -45,7 +45,7 @@
   
  **[easyui](src/doc/easyui.md)**
        
-       [easyui开发文档.chm](src/doc/easyui开发文档.chm)
+   [easyui开发文档.chm](src/doc/easyui开发文档.chm)
 
    - ComboBox（下拉列表框）  当上一个下拉列框选择后，下一个下拉列框显示对应的信息
    - easyui主页面一般的布局
