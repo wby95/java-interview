@@ -84,4 +84,72 @@
    
    ![对象的几种状态.JPG](对象的几种状态.JPG)
    
+  
+# 加载一个对象到内存 get() & load()
+
+   | get()    | load()|
+   | :--------   | :--------      |
+   |get()会立即加载对象，立即检索|load()若不使用对象，不会立即加载，而是返回一个代理对象，延迟检索|
+   |若数据表中没有对应的记录，get()返回null|若数据表中没有对应的记录,load()返回异常|
+   ||load()会抛出懒加载异常，当提前关闭session[在需要初始化代理类对象之前关闭session]|
+ 
+ 
+# 保存对象
+   
+   | save()    | persist()|
+   | :--------   | :--------      |
+   |使临时对象变为持久化对象||
+   |为对象分配ID||
+   |在flush缓存的时候，会发生insert语句|也会执行insert语句|
+   |在save方法之前保存的id是无效的|在persist前有id会抛出异常|
+   |持久化对象的id不能被更改||
+   
+# update
+   
+   若更新一个持久化对象，无需显示调用session.update(),因为在调用Transaction 的commit()之前会执行session的flush()方法。
+   
+   update 如果涉及到触发器的问题时候，常常需要设置:class 节点设置 select-before-update="true"
+   
+   当一个对象为游离对象的时候，需要显示调用更新  游离状态：提前关闭了session ，这时候，数据库有对应记录，但是不存在session中。像一个人不在公司，出差去了，这时候不在受公司的约束（session的管理），但是仍然是公司的一员。
+   
+   无论要更新的游离对象和数据库中的记录是否一样这时候都会发送update()，因为这时候并不知道数据库的记录是怎么样的。
+   
+   
+# 日期属性的配置
+   
+   java   java.util.Date & java.util.calendar
+   
+   - java.util.Date(父类)
+     - ------->  (子类) java.sql.Date  Date[yyyy-MM-dd]
+     - -------> (子类)  java.sql.Time TIME[hh:mm:ss]
+     - -------> (子类)  java.sql.Time TIMESTAMP[yyyy-MM-dd hh:mm:ss]
+   
+   建议将持久化类的属性设置为java.util.Date，因为java.util.Date是三个java.sql.时间 的父类，他可以兼容sql中的三种方式
+   
+  
+  
+# hinernate 实体关系的映射关系
+
+   ## 双向多对一  .xml
+   
+   <many-to-one  name="多关联一那一端的属性名" class="一那一端的全类名" column="一那一端在多的一端对应数据表的外键" />
+   
+   
+   <set name="属性值" table="告诉是关联的那一张表">
+     <key column="那张表关联外键的名字">
+     <one-to-many class="全类名"   />
+   </set>
+                   
+   一般来说，一的一端要放弃维护 inverse="true"
+   
+   
+   ## 双向多对一   注解
+   
+   @manyToOne
+   @joinColumn(name="外键名")  
+   
+   
+    
+  
+   
    
