@@ -170,7 +170,7 @@
 
         ```
        - 值栈的理解：ValueStack(值栈): 贯穿整个 Action 的生命周期(每个 Action 类的对象实例都拥有一个 ValueStack 对象). 相当于一个数据的中转站. 在其中保存当前 Action 对象和其他相关对象. 
-       
+       - [https://www.cnblogs.com/whgk/p/6600393.html](https://www.cnblogs.com/whgk/p/6600393.html)
          ![值栈的两个逻辑部分JPG.JPG](值栈的两个逻辑部分JPG.JPG) & ![值栈1.JPG](值栈1.JPG)
       
         ```   
@@ -183,7 +183,7 @@
                        </s:if>
                        <s:iterator var="i" begin="1" end="pageBean.totalPage">
                            <s:if test="pageBean.page!=#i">
-                               <a href="${pageContext.request.contextPath}/phone_findByBId.action?psid=<s:property value="psid" />&page=<s:property value="#i" />"><s:property
+                               <a href="$  {pageContext.request.contextPath}/phone_findByBId.action?psid=<s:property value="psid" />&page=<s:property value="#i" />"><s:property
                                        value="#i"/></a>
                            </s:if>
                            <s:else>
