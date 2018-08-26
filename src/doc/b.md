@@ -431,4 +431,14 @@
       ![数据库连接池框架.jpg](数据库连接池框架.jpg)                                                                                                                                                                                                                                      
                                                                                                                                                                                                                                        
      
-    
+- 线程池
+   - 为了避免系统频繁创建和销毁线程，我们可以将创建的闲成狗复用。
+   
+      | Executor框架提供了各种类型的线程池|
+      | :--------  | 
+      |newFixedThreadPool :该方法返回的是一个固定线程数量的线程池，该线程池中的线程数量始终不会变，当新的任务被提交时，若线程池中没有空闲的线程，则该任务会被暂存一个任务队列中|
+      |newSingleThreadExecutor:该方法返回只有一个线程的线程池|
+      |newCachedThreadPool :该方法返回的是一个根据实际情况调整线程数量的线程池|
+      |newScheduledThreadPool :该方法返回一个scheduledExecutorService对象，线程池可以指定线程数量|
+      |newSingleScheduledThreadPool|
+     
