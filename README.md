@@ -152,3 +152,7 @@
   **[Angular](src/doc/Angular.md)**(更新ing)
 
   **[面试](src/doc/面试题.md)**
+
+- 扩展
+
+  **[XHR](src/doc/XHR.md)**
