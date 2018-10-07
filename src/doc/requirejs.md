@@ -5,6 +5,11 @@
 * [三、baseUrl&data-main区别](#baseUrl&data-main区别) 
 * [四、不在baseUrl的js文件](#不在baseUrl的js文件) 
 * [五、举个例子](#举个例子) 
+* [六、配置不支持AMD](#配置不支持AMD) 
+* [七、常用配置map](#常用配置map) 
+* [七、jsonp服务](#jsonp服务)
+* [八、text插件的使用](#text插件的使用)
+* [九、国际化](#国际化)
  ##### RequireJs简介
 
    * 异步加载文件，模块化开发：一个文件就是一个模块。
@@ -52,4 +57,64 @@
    
   ![app.PNG](app.PNG) 
     
+   ##### 配置不支持AMD
+   
+   > eg:bootstrap
+   
+   ![bootstrap.PNG](bootstrap.PNG) 
+   
+   ![配置不支持amd.PNG](配置不支持amd.PNG) 
  
+  #####常用配置map
+  > 当我们需要加载不同版本时可用
+  
+   ![map配置.PNG](map配置.PNG) 
+  
+  
+  ##### jsonp服务
+  
+  > jsonp:是json使用的一种模式，可以跨域获得请求。
+  
+  > 同源（origin：就是协议，域名，端口）策略：是浏览器的一个安全功能，不同的客户端
+     脚本在没有授权的情况下，不能读取对方资源。
+     
+  > jsonp的实现
+  
+  ![jsonp的实现.PNG](jsonp的实现.PNG) 
+  
+  > define 定义数据
+  
+  ![define.PNG](define.PNG) 
+  
+  > json-ajax
+  
+  ![jsonp-ajax.PNG](jsonp-ajax.PNG) 
+  
+  > requireJs方式
+  
+   ![requireJs跨域.PNG](requireJs跨域.PNG) 
+  
+  
+  #####  text插件的使用
+  
+   ![插件text.PNG](插件text.PNG) 
+   
+   ![三个.PNG](三个.PNG)
+   
+   ![userhtml.PNG](userhtml.PNG)
+   
+   ![点击按钮加载信息.PNG](点击按钮加载信息.PNG)
+   
+   ##### 国际化
+   
+   ![目录.PNG](目录.PNG)
+   
+   ![指定.PNG](指定.PNG)
+   
+   ![设置cookie语言.PNG](设置cookie语言.PNG)
+   
+   ![配置一下.PNG](配置一下.PNG)
+   
+   
+   
+  
