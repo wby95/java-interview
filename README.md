@@ -154,9 +154,10 @@
   **[面试](src/doc/面试题.md)**
 
 
- #扩展
+ # 扩展
 
  **[XHR](src/doc/XHR.md)**
 
  **[requireJs](src/doc/requirejs.md)**
   
+ **[跨域问题](src/doc/跨域问题.md)**
