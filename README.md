@@ -165,5 +165,6 @@
  **[CSS](src/doc/css.md)**
  
  
-  *[git尚硅谷笔记](src/doc/Git&GitHub.pdf)**
+  **[git尚硅谷笔记](src/doc/Git&GitHub.pdf)**
+ 
  
