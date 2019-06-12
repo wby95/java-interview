@@ -1,7 +1,7 @@
 package hashset如何保证不重复;
 
 
-//..
+//......
 /**
  * Created by wby on 2018/1/18.
  */
